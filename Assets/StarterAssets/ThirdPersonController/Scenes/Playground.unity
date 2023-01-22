@@ -624,6 +624,12 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!1 &550962711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2357679196104700494, guid: 56549443eec6ac440916b7194bfbb45c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1812870087460318888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &648485167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,6 +1656,22 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 1812870087460318888}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1408251503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550962711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d2a6d4392526345a057cf9cd433b1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcName: Alisha
+  npcOccupation: 2
+  npcTalents: 1
+  npcPersonality: 1
 --- !u!1 &1418955119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1697,6 +1719,9 @@ MonoBehaviour:
   inputField: {fileID: 1352343037}
   button: {fileID: 476710389}
   textArea: {fileID: 2133963717}
+  npcInfo: {fileID: 1408251503}
+  worldInfo: {fileID: 485256017}
+  npcDialog: {fileID: 212556149}
   OnReplyReceived:
     m_PersistentCalls:
       m_Calls:
