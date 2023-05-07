@@ -226,6 +226,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &293408885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293408887}
+  - component: {fileID: 293408886}
+  m_Layer: 0
+  m_Name: WorldInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &293408886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293408885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548f6607cdc7dfa4291db1acf8baa9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameStory: 'The Adventurer got stuck in cyberspace after a malfunctioning computer
+    experiment and is trying to escape this place getting help from other residents
+    of the cyberspace. '
+  gameWold: This place is called the cyberspace where virtual entities live, and
+    it is a hideout for cyber criminals. It is botha  marvelous and a dangerous place
+    so everyone should be careful when they are discovering new places here.
+--- !u!4 &293408887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293408885}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.646161, y: -3.5649204, z: 17.545673}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &542508511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,11 +1353,12 @@ MonoBehaviour:
   scroll: {fileID: 1458183612}
   sent: {fileID: 8660877164928630359, guid: 53cd26a6eefa5a74086203cd118a04d3, type: 3}
   received: {fileID: 961534450149497043, guid: adc0146c2853ed1418133faaf4379eb1, type: 3}
-  messages:
-  - Role: user
-    Content: Act as a random stranger in a chat room and reply to the questions.
-      Don't break character. Don't ever mention that you are an AI model. Reply in
-      less than 30 words.
+  npcInfo: {fileID: 0}
+  worldInfo: {fileID: 293408886}
+  npcDialog: {fileID: 212556149}
+  OnReplyReceived:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &976454529
 GameObject:
   m_ObjectHideFlags: 0
