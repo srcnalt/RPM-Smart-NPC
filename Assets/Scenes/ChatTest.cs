@@ -21,6 +21,8 @@ namespace OpenAI
         [SerializeField] private WorldInfo worldInfo;
         [SerializeField] private NpcDialog npcDialog;
         
+        [SerializeField] private TextToSpeech textToSpeech;
+        
         public UnityEvent OnReplyReceived;
         
         private string response;
@@ -45,6 +47,16 @@ namespace OpenAI
 
         private void Start()
         {
+            var message = new ChatMessage()
+            {
+                Role = "user",
+                Content = "The following info is the info about the game world: \n" +
+                          worldInfo.GetPrompt() +
+                          "The following info is the info about the NPC: \n" +
+                          npcInfo.GetPrompt()
+            };
+            messages.Add(message);
+            
             button.onClick.AddListener(SendReply);
         }
         
@@ -75,10 +87,15 @@ namespace OpenAI
 
         private void SendReply()
         {
+            SendReply(inputField.text);
+        }
+
+        public void SendReply(string input)
+        {
             var message = new ChatMessage()
             {
                 Role = "user",
-                Content = inputField.text
+                Content = input
             };
             messages.Add(message);
 
@@ -133,6 +150,8 @@ namespace OpenAI
                 Content = response
             };
             messages.Add(message);
+            
+            textToSpeech.MakeAudioRequest(response);
             
             isDone = true;
             response = "";
