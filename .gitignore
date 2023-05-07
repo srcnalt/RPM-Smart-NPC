@@ -71,3 +71,4 @@ crashlytics-build.properties
 
 Assets/ReadyPlayerMe.unitypackage.meta
 .vsconfig
+Assets/Scripts/Credentials.cs
