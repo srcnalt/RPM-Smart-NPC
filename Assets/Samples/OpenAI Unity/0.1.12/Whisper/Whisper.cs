@@ -9,7 +9,8 @@ namespace OpenAI
     {
         [SerializeField] private Button recordButton;
         [SerializeField] private Dropdown dropdown;
-        [SerializeField] private ChatTest chatTest; 
+        [SerializeField] private ChatTest chatTest;
+        [SerializeField] private Image progress;
         
         private readonly string fileName = "output.wav";
         private readonly int duration = 5;
@@ -40,9 +41,9 @@ namespace OpenAI
         private async void StartRecording()
         {
             if (isRecording)
-            {
+            {                
+                isRecording = false;
                 Debug.Log("Stop recording...");
-                recordButton.GetComponent<Image>().color = Color.red;
                     
                 Microphone.End(null);
                 byte[] data = SaveWav.Save(fileName, clip);
@@ -57,16 +58,30 @@ namespace OpenAI
                 var res = await openai.CreateAudioTranscription(req);
 
                 chatTest.SendReply(res.Text);
-                isRecording = false;
             }
             else
             {
                 Debug.Log("Start recording...");
                 isRecording = true;
-                recordButton.GetComponent<Image>().color = Color.green;
     
                 var index = PlayerPrefs.GetInt("user-mic-device-index");
                 clip = Microphone.Start(dropdown.options[index].text, false, duration, 44100);
+            }
+        }
+        
+        private void Update()
+        {
+            if (isRecording)
+            {
+                time += Time.deltaTime;
+                progress.fillAmount = time / duration;
+            }
+            
+            if(time >= duration)
+            {
+                time = 0;
+                progress.fillAmount = 0;
+                StartRecording();
             }
         }
     }

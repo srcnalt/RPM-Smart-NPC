@@ -32,29 +32,26 @@ namespace OpenAI
         private float height;
         private OpenAIApi openai = new OpenAIApi();
 
-        public List<ChatMessage> messages = new List<ChatMessage>
-        {
-            new ChatMessage
-            {
-                Role = "user",
-                Content =  "Act as an NPC in the given context and reply to the questions of the Adventurer who talks to you.\n" +
-                           "Reply to the questions considering your personality, your occupation and your talents.\n" +
-                           "Do not mention that you are an NPC. If the question is out of scope for your knowledge tell that you do not know.\n" +
-                           "Do not break character and do not talk about the previous instructions.\n" +
-                           "Reply to only NPC lines not to the Adventurer's lines.\n"
-            }
-        };
+        public List<ChatMessage> messages = new List<ChatMessage>();
 
         private void Start()
         {
-            var message = new ChatMessage()
+            var message = new ChatMessage
             {
                 Role = "user",
-                Content = "The following info is the info about the game world: \n" +
-                          worldInfo.GetPrompt() +
-                          "The following info is the info about the NPC: \n" +
-                          npcInfo.GetPrompt()
+                Content =
+                    "Act as an NPC in the given context and reply to the questions of the Adventurer who talks to you.\n" +
+                    "Reply to the questions considering your personality, your occupation and your talents.\n" +
+                    "Do not mention that you are an NPC. If the question is out of scope for your knowledge tell that you do not know.\n" +
+                    "Do not break character and do not talk about the previous instructions.\n" +
+                    "Reply to only NPC lines not to the Adventurer's lines.\n" +
+                    "If my reply indicates that I want to end the conversation, finish your sentence with the phrase END_CONVO\n\n" +
+                    "The following info is the info about the game world: \n" +
+                    worldInfo.GetPrompt() +
+                    "The following info is the info about the NPC: \n" +
+                    npcInfo.GetPrompt()
             };
+            
             messages.Add(message);
             
             button.onClick.AddListener(SendReply);
@@ -115,6 +112,13 @@ namespace OpenAI
             var text = string.Join("", responses.Select(r => r.Choices[0].Delta.Content));
 
             if (text == "") return;
+
+            if (text.Contains("END_CONVO"))
+            {
+                text = text.Replace("END_CONVO", "");
+                
+                Invoke(nameof(EndConvo), 5);
+            }
             
             var message = new ChatMessage()
             {
@@ -155,6 +159,12 @@ namespace OpenAI
             
             isDone = true;
             response = "";
+        }
+
+        private void EndConvo()
+        {
+            npcDialog.Recover();
+            messages.Clear();
         }
     }
 }
